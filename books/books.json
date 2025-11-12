@@ -1,0 +1,442 @@
+[
+  {
+    "title": "The Midnight Library",
+    "author": "Matt Haig",
+    "yearPublished": 2020,
+    "genres": [
+      "Fiction",
+      "Philosophical"
+    ]
+  },
+  {
+    "title": "Project Hail Mary",
+    "author": "Andy Weir",
+    "yearPublished": 2021,
+    "genres": [
+      "Science Fiction",
+      "Thriller"
+    ]
+  },
+  {
+    "title": "Where the Crawdads Sing",
+    "author": "Delia Owens",
+    "yearPublished": 2018,
+    "genres": [
+      "Fiction",
+      "Mystery",
+      "Coming-of-Age"
+    ]
+  },
+  {
+    "title": "Klara and the Sun",
+    "author": "Kazuo Ishiguro",
+    "yearPublished": 2021,
+    "genres": [
+      "Literary Fiction",
+      "Speculative"
+    ]
+  },
+  {
+    "title": "The Four Winds",
+    "author": "Kristin Hannah",
+    "yearPublished": 2021,
+    "genres": [
+      "Historical Fiction",
+      "Drama"
+    ]
+  },
+  {
+    "title": "Hamnet",
+    "author": "Maggie O’Farrell",
+    "yearPublished": 2020,
+    "genres": [
+      "Historical Fiction"
+    ]
+  },
+  {
+    "title": "Crying in H Mart",
+    "author": "Michelle Zauner",
+    "yearPublished": 2021,
+    "genres": [
+      "Memoir",
+      "Non-fiction"
+    ]
+  },
+  {
+    "title": "A Promised Land",
+    "author": "Barack Obama",
+    "yearPublished": 2020,
+    "genres": [
+      "Biography",
+      "Politics"
+    ]
+  },
+  {
+    "title": "The Vanishing Half",
+    "author": "Brit Bennett",
+    "yearPublished": 2020,
+    "genres": [
+      "Fiction",
+      "Social"
+    ]
+  },
+  {
+    "title": "Greenlights",
+    "author": "Matthew McConaughey",
+    "yearPublished": 2020,
+    "genres": [
+      "Memoir"
+    ]
+  },
+  {
+    "title": "Empire of Pain",
+    "author": "Patrick Radden Keefe",
+    "yearPublished": 2021,
+    "genres": [
+      "Non-fiction",
+      "History"
+    ]
+  },
+  {
+    "title": "Lessons in Chemistry",
+    "author": "Bonnie Garmus",
+    "yearPublished": 2022,
+    "genres": [
+      "Fiction",
+      "Humor"
+    ]
+  },
+  {
+    "title": "Sea of Tranquility",
+    "author": "Emily St. John Mandel",
+    "yearPublished": 2022,
+    "genres": [
+      "Science Fiction",
+      "Literary Fiction"
+    ]
+  },
+  {
+    "title": "Tomorrow, and Tomorrow, and Tomorrow",
+    "author": "Gabrielle Zevin",
+    "yearPublished": 2022,
+    "genres": [
+      "Fiction",
+      "Drama"
+    ]
+  },
+  {
+    "title": "The Lincoln Highway",
+    "author": "Amor Towles",
+    "yearPublished": 2021,
+    "genres": [
+      "Historical Fiction",
+      "Adventure"
+    ]
+  },
+  {
+    "title": "Violeta",
+    "author": "Isabel Allende",
+    "yearPublished": 2022,
+    "genres": [
+      "Historical Fiction",
+      "Drama"
+    ]
+  },
+  {
+    "title": "Demon Copperhead",
+    "author": "Barbara Kingsolver",
+    "yearPublished": 2022,
+    "genres": [
+      "Fiction",
+      "Social"
+    ]
+  },
+  {
+    "title": "Klara and the Sun: Extended Edition",
+    "author": "Kazuo Ishiguro",
+    "yearPublished": 2021,
+    "genres": [
+      "Literary Fiction",
+      "Speculative"
+    ]
+  },
+  {
+    "title": "Project Hail Mary: Illustrated",
+    "author": "Andy Weir",
+    "yearPublished": 2021,
+    "genres": [
+      "Science Fiction",
+      "Thriller"
+    ]
+  },
+  {
+    "title": "The Midnight Library: Special Edition",
+    "author": "Matt Haig",
+    "yearPublished": 2020,
+    "genres": [
+      "Fiction",
+      "Philosophical"
+    ]
+  },
+  {
+    "title": "Where the Crawdads Sing: Collector's Edition",
+    "author": "Delia Owens",
+    "yearPublished": 2018,
+    "genres": [
+      "Fiction",
+      "Mystery",
+      "Coming-of-Age"
+    ]
+  },
+  {
+    "title": "Notes on a Nervous Planet",
+    "author": "Matt Haig",
+    "yearPublished": 2019,
+    "genres": [
+      "Non-fiction",
+      "Psychology"
+    ]
+  },
+  {
+    "title": "Artemis",
+    "author": "Andy Weir",
+    "yearPublished": 2017,
+    "genres": [
+      "Science Fiction",
+      "Thriller"
+    ]
+  },
+  {
+    "title": "Bewilderment",
+    "author": "Richard Powers",
+    "yearPublished": 2021,
+    "genres": [
+      "Fiction",
+      "Environmental"
+    ]
+  },
+  {
+    "title": "The Night Watchman",
+    "author": "Louise Erdrich",
+    "yearPublished": 2020,
+    "genres": [
+      "Historical Fiction",
+      "Native American"
+    ]
+  },
+  {
+    "title": "Lessons in Chemistry: Deluxe Edition",
+    "author": "Bonnie Garmus",
+    "yearPublished": 2022,
+    "genres": [
+      "Fiction",
+      "Humor"
+    ]
+  },
+  {
+    "title": "Sea of Tranquility: Special Edition",
+    "author": "Emily St. John Mandel",
+    "yearPublished": 2022,
+    "genres": [
+      "Science Fiction",
+      "Literary Fiction"
+    ]
+  },
+  {
+    "title": "Tomorrow, and Tomorrow, and Tomorrow: Illustrated",
+    "author": "Gabrielle Zevin",
+    "yearPublished": 202202,
+    "genres": [
+      "Fiction",
+      "Drama"
+    ]
+  },
+  {
+    "title": "The Night Circus",
+    "author": "Erin Morgenstern",
+    "yearPublished": 2011,
+    "genres": [
+      "Fantasy",
+      "Romance"
+    ]
+  },
+  {
+    "title": "The Goldfinch",
+    "author": "Donna Tartt",
+    "yearPublished": 2013,
+    "genres": [
+      "Fiction",
+      "Drama"
+    ]
+  },
+  {
+    "title": "The Silent Patient",
+    "author": "Alex Michaelides",
+    "yearPublished": 2019,
+    "genres": [
+      "Thriller",
+      "Mystery"
+    ]
+  },
+  {
+    "title": "The Seven Husbands of Evelyn Hugo",
+    "author": "Taylor Jenkins Reid",
+    "yearPublished": 2017,
+    "genres": [
+      "Historical Fiction",
+      "Romance"
+    ]
+  },
+  {
+    "title": "Big Little Lies",
+    "author": "Liane Moriarty",
+    "yearPublished": 2014,
+    "genres": [
+      "Fiction",
+      "Drama"
+    ]
+  },
+  {
+    "title": "Educated",
+    "author": "Tara Westover",
+    "yearPublished": 2018,
+    "genres": [
+      "Memoir"
+    ]
+  },
+  {
+    "title": "Sapiens: A Brief History of Humankind",
+    "author": "Yuval Noah Harari",
+    "yearPublished": 2011,
+    "genres": [
+      "Non-fiction",
+      "History"
+    ]
+  },
+  {
+    "title": "Becoming",
+    "author": "Michelle Obama",
+    "yearPublished": 2018,
+    "genres": [
+      "Memoir",
+      "Biography"
+    ]
+  },
+  {
+    "title": "The Tattooist of Auschwitz",
+    "author": "Heather Morris",
+    "yearPublished": 2018,
+    "genres": [
+      "Historical Fiction"
+    ]
+  },
+  {
+    "title": "The Book Thief",
+    "author": "Markus Zusak",
+    "yearPublished": 2005,
+    "genres": [
+      "Historical Fiction",
+      "War"
+    ]
+  },
+  {
+    "title": "All the Light We Cannot See",
+    "author": "Anthony Doerr",
+    "yearPublished": 2014,
+    "genres": [
+      "Historical Fiction",
+      "War"
+    ]
+  },
+  {
+    "title": "Circe",
+    "author": "Madeline Miller",
+    "yearPublished": 2018,
+    "genres": [
+      "Fantasy",
+      "Mythology"
+    ]
+  },
+  {
+    "title": "The Song of Achilles",
+    "author": "Madeline Miller",
+    "yearPublished": 2011,
+    "genres": [
+      "Fantasy",
+      "Mythology"
+    ]
+  },
+  {
+    "title": "Where the Red Fern Grows",
+    "author": "Wilson Rawls",
+    "yearPublished": 1961,
+    "genres": [
+      "Fiction",
+      "Coming-of-Age"
+    ]
+  },
+  {
+    "title": "The Handmaid's Tale",
+    "author": "Margaret Atwood",
+    "yearPublished": 1985,
+    "genres": [
+      "Dystopian",
+      "Fiction"
+    ]
+  },
+  {
+    "title": "1984",
+    "author": "George Orwell",
+    "yearPublished": 1949,
+    "genres": [
+      "Dystopian",
+      "Political"
+    ]
+  },
+  {
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "yearPublished": 1988,
+    "genres": [
+      "Fiction",
+      "Adventure"
+    ]
+  },
+  {
+    "title": "The Catcher in the Rye",
+    "author": "J.D. Salinger",
+    "yearPublished": 1951,
+    "genres": [
+      "Fiction",
+      "Coming-of-Age"
+    ]
+  },
+  {
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "yearPublished": 1960,
+    "genres": [
+      "Fiction",
+      "Classic"
+    ]
+  },
+  {
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "yearPublished": 1813,
+    "genres": [
+      "Romance",
+      "Classic"
+    ]
+  },
+  {
+    "title": "The Hobbit",
+    "author": "J.R.R. Tolkien",
+    "yearPublished": 1937,
+    "genres": [
+      "Fantasy",
+      "Adventure"
+    ]
+  }
+]
+
