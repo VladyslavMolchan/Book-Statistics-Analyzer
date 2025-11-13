@@ -1,6 +1,5 @@
 package org.JavaCoreTask;
 
-import org.JavaCoreTask.model.Book;
 import org.JavaCoreTask.parser.BookParser;
 import org.JavaCoreTask.stats.StatisticsCalculator;
 import org.JavaCoreTask.writer.XmlStatisticsWriter;
@@ -73,8 +72,8 @@ public class App {
             for (File file : files) {
                 futures.add(executor.submit(() -> {
                     try {
-                        List<Book> books = BookParser.parseFile(file);
-                        return StatisticsCalculator.calculate(books, attribute);
+                        // Виклик нового методу Streaming API
+                        return BookParser.parseFileAndCollectStats(file, attribute);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -91,6 +90,7 @@ public class App {
 
         return combinedStats;
     }
+
 
 
     static class ExecutorServiceWrapper implements AutoCloseable {

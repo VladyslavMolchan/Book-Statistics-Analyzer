@@ -1,85 +1,192 @@
 package org.JavaCoreTask.parser;
 
-import org.JavaCoreTask.model.Book;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
-import java.util.Objects;
+import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class BookParserTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+class BookParserTest {
 
     @Test
-    void testParseFile_validJson() throws IOException {
-        File file = new File(Objects.requireNonNull(
-                getClass().getClassLoader().getResource("books/books.json")).getFile());
-        List<Book> books = BookParser.parseFile(file);
+    void testParseFileAndCollectStats_validBooks_author() throws IOException {
+        Path path = Files.createTempFile("books", ".json");
+        String json = """
+                [
+                    {"title":"Book A","author":"Author 1","yearPublished":2020,"genres":["Fiction"]},
+                    {"title":"Book B","author":"Author 2","yearPublished":2021,"genres":["Drama"]},
+                    {"title":"Book C","author":"Author 1","yearPublished":2022,"genres":["Fiction","Drama"]}
+                ]
+                """;
+        Files.writeString(path, json);
 
-        assertFalse(books.isEmpty(), "List of books should not be empty");
+        Map<String, Long> stats = BookParser.parseFileAndCollectStats(path.toFile(), "author");
 
-        assertTrue(books.stream().anyMatch(b -> "Matt Haig".equals(b.author())),
-                "Expected at least one book by Matt Haig");
-
-        assertTrue(books.stream().anyMatch(b -> b.genres().contains("Fiction")),
-                "Expected at least one Fiction book");
+        assertEquals(2L, stats.get("Author 1"));
+        assertEquals(1L, stats.get("Author 2"));
+        assertEquals(2, stats.size());
     }
 
     @Test
-    void testParseFile_invalidJson() throws IOException {
+    void testParseFileAndCollectStats_genres() throws IOException {
+        Path path = Files.createTempFile("books", ".json");
+        String json = """
+                [
+                    {"title":"Book A","author":"Author 1","yearPublished":2020,"genres":["Fiction","Drama"]},
+                    {"title":"Book B","author":"Author 2","yearPublished":2021,"genres":["Drama"]}
+                ]
+                """;
+        Files.writeString(path, json);
+
+        Map<String, Long> stats = BookParser.parseFileAndCollectStats(path.toFile(), "genres");
+
+        assertEquals(2L, stats.get("Drama"));
+        assertEquals(1L, stats.get("Fiction"));
+        assertEquals(2, stats.size());
+    }
+
+    @Test
+    void testParseFileAndCollectStats_yearPublished() throws IOException {
+        Path path = Files.createTempFile("books", ".json");
+        String json = """
+                [
+                    {"title":"Book A","author":"Author 1","yearPublished":2020,"genres":["Fiction"]},
+                    {"title":"Book B","author":"Author 2","yearPublished":2020,"genres":["Drama"]},
+                    {"title":"Book C","author":"Author 3","yearPublished":2021,"genres":["Fiction"]}
+                ]
+                """;
+        Files.writeString(path, json);
+
+        Map<String, Long> stats = BookParser.parseFileAndCollectStats(path.toFile(), "yearPublished");
+
+        assertEquals(2L, stats.get("2020"));
+        assertEquals(1L, stats.get("2021"));
+        assertEquals(2, stats.size());
+    }
+
+    @Test
+    void testParseFileAndCollectStats_unknownAuthor() throws IOException {
+        Path path = Files.createTempFile("books", ".json");
+        String json = """
+                [
+                    {"title":"Book A","yearPublished":2020,"genres":["Fiction"]}
+                ]
+                """;
+        Files.writeString(path, json);
+
+        Map<String, Long> stats = BookParser.parseFileAndCollectStats(path.toFile(), "author");
+
+        assertEquals(1L, stats.get("Unknown"));
+    }
+
+    @Test
+    void testParseFileAndCollectStats_emptyArray() throws IOException {
+        Path path = Files.createTempFile("empty", ".json");
+        Files.writeString(path, "[]");
+
+        Map<String, Long> stats = BookParser.parseFileAndCollectStats(path.toFile(), "author");
+        assertTrue(stats.isEmpty());
+    }
+
+    @Test
+    void testParseFileAndCollectStats_invalidJson_throws() throws IOException {
         Path path = Files.createTempFile("invalid", ".json");
         Files.writeString(path, "{\"not\": \"an array\"}");
 
-        assertThrows(IOException.class, () -> BookParser.parseFile(path.toFile()));
+        assertThrows(IOException.class, () ->
+                BookParser.parseFileAndCollectStats(path.toFile(), "author"));
     }
 
     @Test
-    void testParseFile_emptyArray() throws IOException {
-        Path path = Files.createTempFile("emptyArray", ".json");
-        Files.writeString(path, "[]");
-
-        List<Book> books = BookParser.parseFile(path.toFile());
-        assertTrue(books.isEmpty(), "List should be empty for empty JSON array");
-    }
-
-    @Test
-    void testParseFile_multipleBooks() throws IOException {
-        Path path = Files.createTempFile("multipleBooks", ".json");
+    void testParseFileAndCollectStats_invalidAttribute_throws() throws IOException {
+        Path path = Files.createTempFile("books", ".json");
         String json = """
-            [
-                {"title":"Book A","author":"Author 1","yearPublished":2020,"genres":["Fiction"]},
-                {"title":"Book B","author":"Author 2","yearPublished":2021,"genres":["Drama"]}
-            ]
-            """.stripTrailing();  // прибираємо зайві пробіли в кінці
-
+                [
+                    {"title":"Book A","author":"Author 1","yearPublished":2020,"genres":["Fiction"]}
+                ]
+                """;
         Files.writeString(path, json);
 
-        List<Book> books = BookParser.parseFile(path.toFile());
-        assertEquals(2, books.size(), "Should parse two books");
-        assertTrue(books.stream().anyMatch(b -> b.title().equals("Book A")));
-        assertTrue(books.stream().anyMatch(b -> b.title().equals("Book B")));
+        assertThrows(IllegalArgumentException.class, () ->
+                BookParser.parseFileAndCollectStats(path.toFile(), "invalidAttribute"));
+    }
+
+
+    @Test
+    void testParseFileAndCollectStats_nullGenres() throws IOException {
+        Path path = Files.createTempFile("nullGenres", ".json");
+        String json = """
+                [
+                    {"title":"Book A","author":"Author 1","yearPublished":2020,"genres":null}
+                ]
+                """;
+        Files.writeString(path, json);
+
+        Map<String, Long> stats = BookParser.parseFileAndCollectStats(path.toFile(), "genres");
+
+        assertTrue(stats.isEmpty());
     }
 
     @Test
-    void testParseFile_invalidBookInsideArray() throws IOException {
+    void testParseFileAndCollectStats_emptyGenres() throws IOException {
+        Path path = Files.createTempFile("emptyGenres", ".json");
+        String json = """
+                [
+                    {"title":"Book A","author":"Author 1","yearPublished":2020,"genres":[]}
+                ]
+                """;
+        Files.writeString(path, json);
+
+        Map<String, Long> stats = BookParser.parseFileAndCollectStats(path.toFile(), "genres");
+
+
+        assertTrue(stats.isEmpty());
+    }
+
+    @Test
+    void testParseFileAndCollectStats_blankGenreStrings() throws IOException {
+        Path path = Files.createTempFile("blankGenres", ".json");
+        String json = """
+                [
+                    {"title":"Book A","author":"Author 1","yearPublished":2020,"genres":[" ", null, "Fiction"]}
+                ]
+                """;
+        Files.writeString(path, json);
+
+        Map<String, Long> stats = BookParser.parseFileAndCollectStats(path.toFile(), "genres");
+
+
+        assertEquals(1L, stats.get("Fiction"));
+        assertEquals(1, stats.size());
+    }
+
+    @Test
+    void testParseFileAndCollectStats_blankAuthor() throws IOException {
+        Path path = Files.createTempFile("blankAuthor", ".json");
+        String json = """
+                [
+                    {"title":"Book A","author":"   ","yearPublished":2020,"genres":["Fiction"]}
+                ]
+                """;
+        Files.writeString(path, json);
+
+        Map<String, Long> stats = BookParser.parseFileAndCollectStats(path.toFile(), "author");
+
+
+        assertEquals(1L, stats.get("Unknown"));
+    }
+
+
+    @Test
+    void testReadBook_invalidToken_throwsIOException() throws IOException {
         Path path = Files.createTempFile("invalidBook", ".json");
-
-        String json = """
-            [
-                {"title":"Book A","author":"Author 1","yearPublished":2020,"genres":["Fiction"]},
-                {"title":]
-            ]
-            """.stripTrailing();  // прибираємо зайві пробіли в кінці
-
-        Files.writeString(path, json);
-
-        assertThrows(IOException.class, () -> BookParser.parseFile(path.toFile()));
+        Files.writeString(path, "[123]");
+        assertThrows(IOException.class, () ->
+                BookParser.parseFileAndCollectStats(path.toFile(), "author")
+        );
     }
 }

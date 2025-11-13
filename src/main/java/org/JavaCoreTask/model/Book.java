@@ -1,6 +1,7 @@
 package org.JavaCoreTask.model;
 
 import java.util.List;
+import java.util.Objects;
 
 public record Book(
         String title,
@@ -21,7 +22,10 @@ public record Book(
         if (genres == null) {
             genres = List.of();
         } else {
-            genres = List.copyOf(genres);
+            genres = genres.stream()
+                    .filter(Objects::nonNull)
+                    .map(String::trim)
+                    .toList();
         }
     }
 }

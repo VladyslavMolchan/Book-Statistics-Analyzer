@@ -46,29 +46,35 @@ JSON-файли мають містити масив об’єктів:
 ```
 ---
 
-### Час виконання потоків
+## Час виконання потоків
 
 ### Статистика за жанрами
-java -jar target/JavaCore-1.0-SNAPSHOT.jar books genres  
-Threads: 1, Time: 196ms  
-Threads: 2, Time: 2ms  
-Threads: 4, Time: 3ms  
-Threads: 8, Time: 1ms  
+
+java -jar target/JavaCore-1.0-SNAPSHOT.jar books genres 
+
+Threads: 1, Time: 53ms  
+Threads: 2, Time: 12ms  
+Threads: 4, Time: 0ms  
+Threads: 8, Time: 0ms  
 Statistics written to statistics_by_genres.xml
 
 ### Статистика за авторами
+
 java -jar target/JavaCore-1.0-SNAPSHOT.jar books author  
-Threads: 1, Time: 188ms  
-Threads: 2, Time: 2ms  
-Threads: 4, Time: 2ms  
-Threads: 8, Time: 2ms  
+
+Threads: 1, Time: 37ms  
+Threads: 2, Time: 16ms  
+Threads: 4, Time: 5ms  
+Threads: 8, Time: 0ms  
 Statistics written to statistics_by_author.xml
 
 ### Статистика за роком публікації
-java -jar target/JavaCore-1.0-SNAPSHOT.jar books yearPublished  
-Threads: 1, Time: 190ms  
-Threads: 2, Time: 2ms  
-Threads: 4, Time: 2ms  
-Threads: 8, Time: 1ms  
-Statistics written to statistics_by_yearPublished.xml
+
+java -jar target/JavaCore-1.0-SNAPSHOT.jar books yearpublished  
+
+Threads: 1, Time: 32ms  
+Threads: 2, Time: 9ms  
+Threads: 4, Time: 0ms  
+Threads: 8, Time: 0ms  
+Statistics written to statistics_by_yearpublished.xml
 
