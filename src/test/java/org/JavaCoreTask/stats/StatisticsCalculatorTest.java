@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class StatisticsCalculatorTest {
 
@@ -63,8 +63,6 @@ public class StatisticsCalculatorTest {
     }
 
 
-
-
     @Test
     public void testCalculateWithNullBooks() {
         Map<String, Long> result = StatisticsCalculator.calculate(null, "author");
@@ -76,12 +74,13 @@ public class StatisticsCalculatorTest {
         Map<String, Long> result = StatisticsCalculator.calculate(List.of(), "year");
         assertEquals(0, result.size());
     }
+
     @Test
     public void testCalculateWithUnsupportedAttribute() {
         Book book = new Book("Book1", "Author1", 2021, List.of("Fantasy"));
         List<Book> books = List.of(book);
 
-        Exception exception = org.junit.jupiter.api.Assertions.assertThrows(
+        Exception exception = assertThrows(
                 IllegalArgumentException.class,
                 () -> StatisticsCalculator.calculate(books, "unknown")
         );
@@ -95,7 +94,7 @@ public class StatisticsCalculatorTest {
         Book book = new Book("Book1", "Author1", 2021, List.of("Fantasy"));
         List<Book> books = List.of(book);
 
-        org.junit.jupiter.api.Assertions.assertThrows(
+        assertThrows(
                 IllegalArgumentException.class,
                 () -> StatisticsCalculator.calculate(books, null)
         );
@@ -112,6 +111,39 @@ public class StatisticsCalculatorTest {
 
 
         assertEquals(0, result.size());
+    }
+
+
+    @Test
+    void testCalculateWithBlankAuthorsAndGenres() {
+        Book book1 = new Book("Book1", "   ", 2021, List.of("", "  "));
+        Book book2 = new Book("Book2", null, 2022, null);
+        List<Book> books = List.of(book1, book2);
+
+        Map<String, Long> resultAuthor = StatisticsCalculator.calculate(books, "author");
+        assertEquals(2, resultAuthor.get("Unknown")); // null or blank author → Unknown
+
+        Map<String, Long> resultGenres = StatisticsCalculator.calculate(books, "genres");
+        assertEquals(0, resultGenres.size()); // only null/blank genres → empty map
+    }
+
+    @Test
+    void testCalculateWithAttributeYearPublished() {
+        Book book = new Book("Book1", "Author1", 2023, List.of("Fantasy"));
+        List<Book> books = List.of(book);
+
+        Map<String, Long> result = StatisticsCalculator.calculate(books, "yearpublished");
+        assertEquals(1, result.get("2023"));
+    }
+
+    @Test
+    void testCalculateWithEmptyStringAttribute() {
+        Book book = new Book("Book1", "Author1", 2023, List.of("Fantasy"));
+        List<Book> books = List.of(book);
+
+        Exception ex = assertThrows(IllegalArgumentException.class,
+                () -> StatisticsCalculator.calculate(books, ""));
+        assertTrue(ex.getMessage().contains("Unsupported attribute"));
     }
 
 }

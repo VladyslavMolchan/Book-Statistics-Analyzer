@@ -78,6 +78,4 @@ public class XmlStatisticsWriterTest {
         assertThrows(NullPointerException.class,
                 () -> XmlStatisticsWriter.write("genre", null));
     }
-
-
 }
