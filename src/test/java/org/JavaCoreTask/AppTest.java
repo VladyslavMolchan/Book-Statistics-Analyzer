@@ -6,6 +6,10 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
+
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -39,9 +43,9 @@ public class AppTest {
 
     @Test
     void testMain_validRun() throws Exception {
-
         File folder = Files.createTempDirectory("booksRun").toFile();
         File jsonFile = new File(folder, "book.json");
+
         Files.writeString(jsonFile.toPath(),
                 "[{\"title\":\"Book A\",\"author\":\"Author 1\",\"yearPublished\":2020,\"genres\":[\"Fiction\"]}]");
 
@@ -52,6 +56,49 @@ public class AppTest {
 
         Files.deleteIfExists(xmlFile.toPath());
         Files.deleteIfExists(jsonFile.toPath());
+        Files.deleteIfExists(folder.toPath());
+    }
+
+
+
+    @Test
+    void testParseFilesAndComputeStats_invalidAttribute() throws Exception {
+        File folder = Files.createTempDirectory("invalidAttrTest").toFile();
+        File jsonFile = new File(folder, "book.json");
+
+        Files.writeString(jsonFile.toPath(),
+                "[{\"title\":\"Book A\",\"author\":\"Author 1\",\"yearPublished\":2020}]");
+
+        List<File> files = List.of(jsonFile);
+
+        Map<String, Long> stats = App.parseFilesAndComputeStats(files, 2, "genres");
+
+        assertTrue(stats.isEmpty());
+
+        Files.deleteIfExists(jsonFile.toPath());
+        Files.deleteIfExists(folder.toPath());
+    }
+
+    @Test
+    void testParseFilesAndComputeStats_ioException() throws Exception {
+        File folder = Files.createTempDirectory("ioErrTest").toFile();
+
+        File dirInsteadOfJson = new File(folder, "not_a_file.json");
+        boolean created = dirInsteadOfJson.mkdir();
+        assertTrue(created);
+
+        List<File> files = List.of(dirInsteadOfJson);
+
+        boolean thrown = false;
+        try {
+            App.parseFilesAndComputeStats(files, 2, "author");
+        } catch (ExecutionException e) {
+            thrown = true;
+        }
+
+        assertTrue(thrown);
+
+        Files.deleteIfExists(dirInsteadOfJson.toPath());
         Files.deleteIfExists(folder.toPath());
     }
 }

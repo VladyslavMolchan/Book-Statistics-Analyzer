@@ -7,9 +7,14 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Map;
 
+import java.util.Objects;
+
 public class XmlStatisticsWriter {
 
     public static void write(String attribute, Map<String, Long> stats) throws IOException {
+        Objects.requireNonNull(attribute, "attribute must not be null");
+        Objects.requireNonNull(stats, "stats must not be null");
+
         String fileName = "statistics_by_" + attribute + ".xml";
 
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(fileName), StandardCharsets.UTF_8)) {
